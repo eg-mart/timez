@@ -11,3 +11,4 @@ class TaskTable(SqlAlchemyBase, SerializerMixin):
     start_date = sqlalchemy.Column(sqlalchemy.Text, nullable=True)
     end_date = sqlalchemy.Column(sqlalchemy.Text, nullable=True)
     list = sqlalchemy.Column(sqlalchemy.INT, nullable=True)
+    tags = sqlalchemy.Column(sqlalchemy.Text, nullable=True)

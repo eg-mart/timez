@@ -7,61 +7,128 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>214</height>
+    <height>231</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Редактировать задачу</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+	 background-color: rgb(41, 53, 59);
+	color: white;
+}
+
+QPushButton {
+	border: 0px solid rgb(30, 39, 43);
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-top: 1px solid rgb(34, 44, 49);
+	border-left: 1px solid rgb(34, 44, 49);
+}
+
+QPushButton:hover {
+	border: 0px solid rgb(30, 39, 43);
+	border-right-width: 3px;
+	border-bottom-width: 3px;
+	border-top: 2px solid rgb(34, 44, 49);
+	border-left: 2px solid rgb(34, 44, 49);
+}
+
+QPushButton:pressed {
+	background-color: rgb(34, 44, 49);
+}
+
+QLabel {
+	background-color: rgba(255, 255, 255, 0);
+}
+</string>
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
      <x>9</x>
-     <y>9</y>
+     <y>10</y>
      <width>381</width>
-     <height>151</height>
+     <height>166</height>
     </rect>
    </property>
-   <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="Label">
-      <property name="text">
-       <string>Имя:</string>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="2">
+     <widget class="QDateEdit" name="start_date">
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="name"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="Label_2">
-      <property name="text">
-       <string>Приоритет:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QSpinBox" name="priority"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="Label_3">
-      <property name="text">
-       <string>Дата начала:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="start_date"/>
     </item>
     <item row="3" column="0">
+     <widget class="QCheckBox" name="enable_end_date">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
      <widget class="QLabel" name="Label_4">
       <property name="text">
        <string>Дата окончания:</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="end_date"/>
+    <item row="2" column="0">
+     <widget class="QCheckBox" name="enable_start_date">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="Label">
+      <property name="text">
+       <string>Имя:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="name"/>
+    </item>
+    <item row="1" column="2">
+     <widget class="QSpinBox" name="priority"/>
+    </item>
+    <item row="3" column="2">
+     <widget class="QDateEdit" name="end_date">
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="Label_2">
+      <property name="text">
+       <string>Приоритет:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="Label_3">
+      <property name="text">
+       <string>Дата начала:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Теги:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QLineEdit" name="tags">
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -69,13 +136,16 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>170</y>
+     <y>190</y>
      <width>81</width>
      <height>34</height>
     </rect>
    </property>
    <property name="text">
     <string>Сохранить</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
    </property>
   </widget>
  </widget>
