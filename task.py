@@ -18,8 +18,10 @@ class Task:
         self.list = lst
 
     @staticmethod
-    def load_list(list_id):
+    def load_list(lst):
         tasks = []
+
+        list_id = lst.id
 
         session = create_session()
         with session.begin():
@@ -44,10 +46,17 @@ class Task:
             task.priority = task_data.priority
             task.tags = json.loads(task_data.tags)
             task.id = task_data.id
-            task.list = task_data.list
+            task.list = lst
             tasks.append(task)
 
         return tasks
+
+    def delete(self):
+        session = create_session()
+        with session.begin():
+            session.query(TaskTable).filter(TaskTable.id == self.id).delete()
+            self.list.tasks.remove(self)
+            del self
 
     def save(self):
         session = create_session()
@@ -67,7 +76,7 @@ class Task:
         with session.begin():
             task_data = session.query(TaskTable).filter(TaskTable.id == self.id).first()
             if task_data is None:
-                session.add(TaskTable(id=self.id, name=self.name, priority=self.priority, list=self.list,
+                session.add(TaskTable(id=self.id, name=self.name, priority=self.priority, list=self.list.id,
                                       start_date=start, end_date=end, tags=tags))
             else:
                 task_data.name = self.name
@@ -75,4 +84,4 @@ class Task:
                 task_data.start_date = start
                 task_data.end_date = end
                 task_data.tags = tags
-                task_data.list = self.list
+                task_data.list = self.list.id

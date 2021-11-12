@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QToolButton, QHBoxLayout
-from PyQt5.QtGui import QPixmap, QColor, QIcon
+from PyQt5.QtGui import QPixmap, QColor, QIcon, QPainter
+from PyQt5.QtCore import Qt
 
 
 class ListItemWidget(QWidget):
@@ -7,7 +8,12 @@ class ListItemWidget(QWidget):
         super().__init__()
         self.color_code = QLabel(self)
         pixmap = QPixmap(14, 32)
-        pixmap.fill(QColor(*lst.color))
+        pixmap.fill(QColor('transparent'))
+        painter = QPainter(pixmap)
+        painter.setBrush(QColor(*lst.color))
+        painter.setPen(QColor(*lst.color))
+        painter.drawEllipse(pixmap.rect().center(), 5, 5)
+        painter.end()
         self.color_code.setPixmap(pixmap)
         self.name = QLabel(self)
         self.name.setText(lst.name)
@@ -32,9 +38,15 @@ class TaskItemWidget(QWidget):
     def __init__(self, task):
         super().__init__()
         self.color_code = QLabel(self)
-        colors = ["red", "yellow", "grey", "grey"]
-        pixmap = QPixmap(14, 32)
-        pixmap.fill(QColor(colors[task.priority - 1]))
+        colors = ["red", "yellow", "green", "grey"]
+        pixmap = QPixmap(18, 32)
+        pixmap.fill(QColor('transparent'))
+        painter = QPainter(pixmap)
+        painter.setBrush(QColor(QColor(colors[task.priority - 1])))
+        painter.setPen(QColor(QColor(colors[task.priority - 1])))
+        painter.drawEllipse(pixmap.rect().center(), 3, 3)
+        painter.end()
+        self.color_code.setPixmap(pixmap)
         self.color_code.setPixmap(pixmap)
         self.name = QLabel(self)
         self.name.setText(task.name)

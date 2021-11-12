@@ -10,3 +10,5 @@ class ListTable(SqlAlchemyBase, SerializerMixin):
     color = sqlalchemy.Column(sqlalchemy.Text, nullable=True)
     sort = sqlalchemy.Column(sqlalchemy.INT, nullable=True)
     filtration = sqlalchemy.Column(sqlalchemy.Text, nullable=True)
+    start_date = sqlalchemy.Column(sqlalchemy.Text, nullable=True)
+    end_date = sqlalchemy.Column(sqlalchemy.Text, nullable=True)

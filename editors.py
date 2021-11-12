@@ -1,16 +1,18 @@
-from PyQt5.QtWidgets import QWidget, QMenu
+from PyQt5.QtWidgets import QWidget, QMenu, QColorDialog
 from PyQt5.QtCore import QEvent
+from PyQt5.QtGui import QPixmap, QIcon, QColor
 from PyQt5 import uic
 from ui.checkable_combobox import CheckableComboBox
+from ui import filter_editor, task_editor, list_editor
 
 
-class TaskEditor(QWidget):
+class TaskEditor(QWidget, task_editor.Ui_Form):
     def __init__(self, task, main_window):
         super().__init__()
         self.task = task
         self.main_window = main_window
 
-        uic.loadUi('ui/task_editor.ui', self)
+        self.setupUi(self)
         self.name.setText(task.name)
         self.priority.setValue(task.priority)
         self.tags.setText(', '.join(task.tags))
@@ -23,8 +25,15 @@ class TaskEditor(QWidget):
             self.enable_end_date.setChecked(True)
 
         self.save.clicked.connect(self.on_save)
+        self.delete_task.clicked.connect(self.on_delete)
 
         self.move(self.main_window.rect().center() - self.rect().center())
+
+    def on_delete(self):
+        self.task.delete()
+        self.main_window.update_tasks()
+        self.main_window.update_default_lists()
+        self.close()
 
     def on_save(self):
         self.task.name = self.name.text()
@@ -42,20 +51,76 @@ class TaskEditor(QWidget):
 
         self.task.save()
         self.main_window.update_tasks()
+        self.main_window.update_default_lists()
+        self.main_window.show_task(self.task)
         self.close()
 
 
-class ListEditor(QWidget):
-    pass
-
-
-class FilterEditor(QWidget):
+class ListEditor(QWidget, list_editor.Ui_Form):
     def __init__(self, lst, main_window):
         super().__init__()
         self.list = lst
         self.main_window = main_window
 
-        uic.loadUi('ui/filter_editor.ui', self)
+        self.setupUi(self)
+
+        self.name.setText(self.list.name)
+        if self.list.start_date is not None:
+            self.start_date.setDate(self.list.start_date)
+            self.enable_start_date.setChecked(True)
+        if self.list.end_date is not None:
+            self.end_date.setDate(self.list.end_date)
+            self.enable_end_date.setChecked(True)
+        pixmap = QPixmap(32, 32)
+        pixmap.fill(QColor(*self.list.color))
+        self.color.setIcon(QIcon(pixmap))
+
+        self.color.clicked.connect(self.change_color)
+        self.save.clicked.connect(self.on_save)
+        self.delete_list.clicked.connect(self.on_delete)
+
+        self.move(self.main_window.rect().center() - self.rect().center())
+
+    def change_color(self):
+        color = QColorDialog.getColor(parent=self)
+        if color.isValid():
+            self.list.color = [int(color.redF() * 255), int(color.greenF() * 255),
+                               int(color.blueF() * 255)]
+            pixmap = QPixmap(32, 32)
+            pixmap.fill(color)
+            self.color.setIcon(QIcon(pixmap))
+
+    def on_save(self):
+        self.list.name = self.name.text()
+
+        if self.enable_start_date.isChecked():
+            self.list.start_date = self.start_date.date()
+        else:
+            self.list.start_date = None
+        if self.enable_end_date.isChecked():
+            self.list.end_date = self.end_date.date()
+        else:
+            self.list.end_date = None
+
+        self.list.save()
+        self.main_window.update_lists()
+        self.close()
+
+    def on_delete(self):
+        self.list.delete()
+        self.main_window.lists.clear()
+        self.main_window.load_lists()
+        self.close()
+
+
+class FilterEditor(QWidget, filter_editor.Ui_Form):
+    def __init__(self, lst, main_window):
+        super().__init__()
+        self.list = lst
+        self.main_window = main_window
+
+        self.setupUi(self)
+
         self.priority = CheckableComboBox(self)
         items = [1, 2, 3, 4]
         for item in items:
