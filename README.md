@@ -5,5 +5,6 @@ Timez - это простое и гибкое приложение для тай
 простоте и функциональности интерфейса. Приложение имеет большой потенциал развития с использованием Интернет-технологий.
 
 **Ссылка на исполняемый файл:** https://disk.yandex.ru/d/NdJOtJuVKIAO0w
-**Ссылка на презентацию: https://docs.google.com/presentation/d/1WFEmArkAHnEpLlhj1khaLuvx4-onM5EGYd08bMnltIM/edit** 
+
+**Ссылка на презентацию:** https://docs.google.com/presentation/d/1WFEmArkAHnEpLlhj1khaLuvx4-onM5EGYd08bMnltIM/edit 
 
