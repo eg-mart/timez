@@ -1,0 +1,13 @@
+greenlet==1.1.2
+importlib-metadata==4.8.2
+packaging==21.3
+pyparsing==3.0.6
+PyQt5==5.15.6
+PyQt5-Qt5==5.15.2
+PyQt5-sip==12.9.0
+sip==6.4.0
+SQLAlchemy==1.4.27
+SQLAlchemy-serializer==1.4.1
+toml==0.10.2
+typing-extensions==4.0.0
+zipp==3.6.0
