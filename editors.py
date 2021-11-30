@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QMenu, QColorDialog
-from PyQt5.QtCore import QEvent
+from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QPixmap, QIcon, QColor
 from PyQt5 import uic
 from ui.checkable_combobox import CheckableComboBox
@@ -20,9 +20,13 @@ class TaskEditor(QWidget, task_editor.Ui_Form):
         if task.start_date is not None:
             self.start_date.setDate(task.start_date)
             self.enable_start_date.setChecked(True)
+        else:
+            self.start_date.setDate(QDate.currentDate())
         if task.end_date is not None:
             self.end_date.setDate(task.end_date)
             self.enable_end_date.setChecked(True)
+        else:
+            self.end_date.setDate(QDate.currentDate())
 
         self.save.clicked.connect(self.on_save)
         self.delete_task.clicked.connect(self.on_delete)
@@ -68,9 +72,13 @@ class ListEditor(QWidget, list_editor.Ui_Form):
         if self.list.start_date is not None:
             self.start_date.setDate(self.list.start_date)
             self.enable_start_date.setChecked(True)
+        else:
+            self.start_date.setDate(QDate.currentDate())
         if self.list.end_date is not None:
             self.end_date.setDate(self.list.end_date)
             self.enable_end_date.setChecked(True)
+        else:
+            self.end_date.setDate(QDate.currentDate())
         pixmap = QPixmap(32, 32)
         pixmap.fill(QColor(*self.list.color))
         self.color.setIcon(QIcon(pixmap))
@@ -145,9 +153,13 @@ class FilterEditor(QWidget, filter_editor.Ui_Form):
         if self.list.filtration['start_date'] is not None:
             self.enabled_start_date.setChecked(True)
             self.start_date.setDate(self.list.filtration['start_date'])
+        else:
+            self.start_date.setDate(QDate.currentDate())
         if self.list.filtration['end_date'] is not None:
             self.enabled_end_date.setChecked(True)
             self.end_date.setDate(self.list.filtration['end_date'])
+        else:
+            self.end_date.setDate(QDate.currentDate())
 
         self.accept.clicked.connect(self.on_save)
         self.cancel.clicked.connect(self.close)

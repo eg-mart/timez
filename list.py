@@ -123,14 +123,8 @@ class List:
         if self.sort == List.Sort.name:
             ready_tasks.sort(key=lambda x: x.name)
         elif self.sort == List.Sort.end_date:
-            for task in ready_tasks:
-                if task.end_date is None:
-                    ready_tasks.remove(task)
-            ready_tasks.sort(key=lambda x: x.end_date)
+            ready_tasks.sort(key=lambda x: x.end_date if x.end_date is not None else QDate())
         elif self.sort == List.Sort.start_date:
-            for task in ready_tasks:
-                if task.start_date is None:
-                    ready_tasks.remove(task)
             ready_tasks.sort(key=lambda x: x.start_date if x.start_date is not None else QDate())
         elif self.sort == List.Sort.priority:
             ready_tasks.sort(key=lambda x: x.priority)
