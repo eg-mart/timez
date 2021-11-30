@@ -10,6 +10,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ui.scheduler import Scheduler
+from os.path import realpath
+
+
+def filename(name):
+        return realpath(name)
 
 
 class Ui_MainWindow(object):
@@ -108,7 +113,7 @@ class Ui_MainWindow(object):
         self.task_add.setMinimumSize(QtCore.QSize(40, 40))
         self.task_add.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui/plus.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(filename("ui/plus.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.task_add.setIcon(icon)
         self.task_add.setArrowType(QtCore.Qt.NoArrow)
         self.task_add.setObjectName("task_add")
@@ -117,7 +122,7 @@ class Ui_MainWindow(object):
         self.set_sort.setMinimumSize(QtCore.QSize(40, 40))
         self.set_sort.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ui/sort.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(filename("ui/sort.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.set_sort.setIcon(icon1)
         self.set_sort.setObjectName("set_sort")
         self.verticalLayout_2.addWidget(self.set_sort)
@@ -125,7 +130,7 @@ class Ui_MainWindow(object):
         self.set_filtration.setMinimumSize(QtCore.QSize(40, 40))
         self.set_filtration.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("ui/filter.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(filename("ui/filter.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.set_filtration.setIcon(icon2)
         self.set_filtration.setObjectName("set_filtration")
         self.verticalLayout_2.addWidget(self.set_filtration)
@@ -133,7 +138,7 @@ class Ui_MainWindow(object):
         self.set_view.setMinimumSize(QtCore.QSize(40, 40))
         self.set_view.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("ui/calendar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(filename("ui/calendar.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.set_view.setIcon(icon3)
         self.set_view.setCheckable(False)
         self.set_view.setChecked(False)

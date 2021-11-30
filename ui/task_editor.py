@@ -86,6 +86,8 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.tags, 4, 2, 1, 1)
         self.priority = QtWidgets.QSpinBox(Form)
         self.priority.setObjectName("priority")
+        self.priority.setMinimum(1)
+        self.priority.setMaximum(4)
         self.gridLayout.addWidget(self.priority, 1, 2, 1, 1)
         self.Label_2 = QtWidgets.QLabel(Form)
         self.Label_2.setObjectName("Label_2")
