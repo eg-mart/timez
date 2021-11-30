@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'list_editor.ui'
+# Form implementation generated from reading ui file 'ui/list_editor.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -110,6 +110,15 @@ class Ui_Form(object):
         self.delete_list.setMinimumSize(QtCore.QSize(100, 40))
         self.delete_list.setObjectName("delete_list")
         self.horizontalLayout.addWidget(self.delete_list)
+        self.saveAsTxt = QtWidgets.QPushButton(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.saveAsTxt.sizePolicy().hasHeightForWidth())
+        self.saveAsTxt.setSizePolicy(sizePolicy)
+        self.saveAsTxt.setMinimumSize(QtCore.QSize(110, 40))
+        self.saveAsTxt.setObjectName("saveAsTxt")
+        self.horizontalLayout.addWidget(self.saveAsTxt)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.verticalLayout.setStretch(0, 1)
 
@@ -125,3 +134,4 @@ class Ui_Form(object):
         self.label_4.setText(_translate("Form", "Дата ококнчания:"))
         self.save.setText(_translate("Form", "Сохранить"))
         self.delete_list.setText(_translate("Form", "Удалить"))
+        self.saveAsTxt.setText(_translate("Form", "Сохранить в txt"))

@@ -86,6 +86,7 @@ class ListEditor(QWidget, list_editor.Ui_Form):
         self.color.clicked.connect(self.change_color)
         self.save.clicked.connect(self.on_save)
         self.delete_list.clicked.connect(self.on_delete)
+        self.saveAsTxt.clicked.connect(self.save_as_txt)
 
         self.move(self.main_window.rect().center() - self.rect().center())
 
@@ -97,6 +98,20 @@ class ListEditor(QWidget, list_editor.Ui_Form):
             pixmap = QPixmap(32, 32)
             pixmap.fill(color)
             self.color.setIcon(QIcon(pixmap))
+
+    def save_as_txt(self):
+        with open(self.list.name + '.txt', mode='w', encoding='utf8') as file:
+            for task in self.list.get_tasks():
+                file.write(f'[{task.priority}]\t{task.name}')
+                if task.start_date is not None:
+                    file.write(f'\t{task.start_date.toString()} - ')
+                else:
+                    file.write('\t--- - ')
+                if task.end_date is not None:
+                    file.write(f'{task.end_date.toString()}\n')
+                else:
+                    file.write('---\n')
+        self.close()
 
     def on_save(self):
         self.list.name = self.name.text()
